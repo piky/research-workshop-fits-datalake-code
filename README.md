@@ -39,6 +39,63 @@ project_folder/
 |-- source.bat 
 </pre>
 
+### Prepare pre-requisite environment
+
+Run the following commands on a newly created Ubuntu virtual machine.
+
+```
+$ sudo apt install -y software-properties-common
+```
+
+```
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+```
+
+```
+$ sudo apt update
+```
+
+```
+$ sudo apt install -y awscli zip python3.7 python3.7-venv python3.7-dev build-essential
+```
+
+```
+$ curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+```
+Or other active version (recommended LTS version)
+
+```
+$ sudo bash nodesource_setup.sh
+```
+
+```
+$ sudo apt install -y nodejs
+```
+
+```
+$ sudo npm install -g aws-cdk
+```
+
+```
+$ cdk --version
+```
+
+```
+$ aws --version
+```
+
+```
+$ aws configure
+```
+
+```
+$ git clone https://github.com/aws-samples/research-workshop-fits-datalake-code.git
+```
+
+```
+$ cd research-workshop-fits-datalake-code/
+```
+
 #### Step 1. Create a virtual environment
 
 This project is set up like a standard Python project. To create the virtualenv it assumes that there is a `python3` (or `python` for Windows) executable in your path with access to the `venv`
@@ -47,7 +104,7 @@ package.
 To create a virtualenv on MacOS and Linux:
 
 ```
-$ python3 -m venv .env
+$ python3.7 -m venv .env
 ```
 
 After the init process completes and the virtualenv is created, you can use the following
@@ -91,8 +148,18 @@ stack_id = "my-fits-datalake"
 ###### End customization
 ```
 
-#### Step 3. Synthesize and deploy the project
+#### Step 3. See [Appendix](#Appendix) to create a layer for the lambda function
+
+#### Step 4. Synthesize and deploy the project
 At this point you can now synthesize the CloudFormation template for this code. The result templates can be viewed in cdk.out (auto generated) folder
+
+```
+$ chmod +x bootstrap/bootstrap-cdk.sh
+```
+
+```
+$ bootstrap/bootstrap-cdk.sh
+```
 
 ```
 $ cdk synth     # this will synthesize the CloudFormation templates
@@ -110,7 +177,7 @@ Main resources created will be ( not including IAM Roles, policies, lambda layer
 Subsequent execution of `cdk deploy` will create a CloudFormation stack changeset and only update the existing stack.
 
 
-#### Step 4. Test your deployment
+#### Step 5. Test your deployment
 If you want to use some public FITS data, navigate to the 'fits_data" folder, run the following commands to download the data
 
 ```bash
