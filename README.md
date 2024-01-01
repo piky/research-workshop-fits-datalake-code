@@ -89,7 +89,7 @@ $ aws configure
 ```
 
 ```
-$ git clone https://github.com/aws-samples/research-workshop-fits-datalake-code.git
+$ git clone https://github.com/piky/research-workshop-fits-datalake-code.git
 ```
 
 ```
@@ -229,11 +229,11 @@ Let's walk through what happens when a FITS file is uploaded to the source bucke
 ### How to Create a layer for the lambda function
 
 ```
-$ mkdir resources_layer
-$ mkdir python
+$ mkdir resources_layer python
 $ pip3 install aws_cdk.aws_lambda aws_cdk.aws_s3
-$ pip3 install astropy --target python
-$ zip -r9 resources_layer/astropy.zip python
+$ pip3 download astropy==4.0.1.post1 -d python --no-deps --no-binary=:all:
+$ tar xvzf python/astropy-4.0.1.post1.tar.gz -C python/
+$ zip -r9 resources_layer/astropy.zip python/astropy-4.0.1.post1
 ```
 use resources_layer/astropy.zip to create a new layer
 
